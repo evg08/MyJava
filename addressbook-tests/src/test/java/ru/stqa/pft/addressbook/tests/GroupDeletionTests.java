@@ -1,7 +1,9 @@
 package ru.stqa.pft.addressbook.tests;
 
-public class GroupDeletion extends TestBase {
+import org.testng.annotations.Test;
 
+public class GroupDeletionTests extends TestBase {
+  @Test
     public void groupDeletion() {
     app.getNavigationHelper().gotoGroupPage();
     app.getGroupHelper().selectGroup();
