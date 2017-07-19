@@ -19,8 +19,7 @@ import static org.openqa.selenium.OutputType.*;
 
 public class GroupDeletion extends TestBase {
 
-  @Test
-  public void groupDeletion() {
+    public void groupDeletion() {
     gotoGroupPage();
     selectGroup();
     deleteSelectedGroups();
