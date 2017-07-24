@@ -3,15 +3,18 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-public class GroupCreationTests extends TestBase{
-
+/**
+ * Created by Евгения on 24.07.2017.
+ */
+public class GroupModificationTests extends TestBase{
   @Test
   public void groupCreationTests() {
-    //loginPage("admin", "secret");
+
     app.getNavigationHelper().gotoGroupPage();
-    app.getGroupHelper().initGroupCreation();
+    app.getGroupHelper().selectGroup();
+    app.getGroupHelper().initGroupModification();
     app.getGroupHelper().fillGroupForm(new GroupData("test135", "test56", "test56"));
-    app.getGroupHelper().submitGroupCreation();
+    app.getGroupHelper().submitGroupModification();
     app.getGroupHelper().returnGroupsPage();
   }
 
