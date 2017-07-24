@@ -1,4 +1,4 @@
-package ru.stqa.pft.addreessbook;
+package ru.stqa.pft.addreessbook.model;
 
 public class ContactData {
   private final String firstname;

@@ -1,4 +1,4 @@
-package ru.stqa.pft.addreessbook;
+package ru.stqa.pft.addreessbook.appmanager;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -6,45 +6,16 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-
-import java.util.concurrent.TimeUnit;
+import ru.stqa.pft.addreessbook.model.ContactData;
 
 /**
- * Created by Евгения on 19.07.2017.
+ * Created by Евгения on 24.07.2017.
  */
-public class TestBase {
-  FirefoxDriver wd;
+public class ContactHelper {
+  private FirefoxDriver wd;
 
-  public static boolean isAlertPresent(FirefoxDriver wd) {
-    try {
-      wd.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
-
-  @BeforeMethod
-  public void setUp() throws Exception {
-    System.setProperty("webdriver.gecko.driver", "C:\\geckodriver\\geckodriver.exe");
-    wd = new FirefoxDriver();
-    wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-    wd.get("http://localhost/addressbook/edit.php");
-    loginPage("admin", "secret");
-  }
-
-  private void loginPage(String username, String password) {
-    wd.findElement(By.name("pass")).click();
-    wd.findElement(By.name("pass")).sendKeys("\\undefined");
-    wd.findElement(By.name("user")).click();
-    wd.findElement(By.name("user")).clear();
-    wd.findElement(By.name("user")).sendKeys(username);
-    wd.findElement(By.name("pass")).click();
-    wd.findElement(By.name("pass")).clear();
-    wd.findElement(By.name("pass")).sendKeys(password);
-    wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
+  public ContactHelper(FirefoxDriver wd) {
+    this.wd=wd;
   }
 
   public void fillContact(ContactData contactData) {
@@ -109,19 +80,6 @@ public class TestBase {
     wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
   }
 
-  protected void goToContactPage() {
-    wd.findElement(By.linkText("ADD_NEW")).click();
-  }
-
-  @AfterMethod
-  public void tearDown() {
-    wd.quit();
-  }
-
-  public void gotoHomepage() {
-      wd.findElement(By.linkText("HOME")).click();
-  }
-
   public void okDialogDeletionButton() {
 
     //Alert alert = wd.switchTo().alert();
@@ -142,7 +100,7 @@ public class TestBase {
     }
   }
 
-  protected void isAlertAccept(Alert alert){
+  public void isAlertAccept(Alert alert){
     try {
       alert.accept();
       return ;
@@ -150,7 +108,8 @@ public class TestBase {
       return ;
     }
   }
-  protected void isAlertCancel(Alert alert){
+
+  public void isAlertCancel(Alert alert){
     try {
       alert.dismiss();
       return ;
@@ -158,7 +117,4 @@ public class TestBase {
       return ;
     }
   }
-
 }
-
-
