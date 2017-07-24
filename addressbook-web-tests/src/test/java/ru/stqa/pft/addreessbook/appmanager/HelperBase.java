@@ -4,6 +4,7 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -24,6 +25,12 @@ public class HelperBase {
   public void click(By locator) {
   wd.findElement(locator).click();
 }
+
+
+
+  public void actionPerform(By locator) {
+    new Actions(wd).doubleClick(wd.findElement(locator)).build().perform();
+  }
 
   public void type(By locator, String text) {
   wd.findElement(locator).click();
