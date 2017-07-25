@@ -15,9 +15,15 @@ import java.util.concurrent.TimeUnit;
  */
 public class ApplicationManager {
   WebDriver wd;
-  private  NavigationHelper navigationHelper;
+  private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
   private SessionHelper sessionHelper;
+  private String browser;
+
+  public ApplicationManager(String browser) {
+
+    this.browser = browser;
+  }
 
   public static boolean isAlertPresent(FirefoxDriver wd) {
     try {
@@ -27,19 +33,17 @@ public class ApplicationManager {
       return false;
     }
   }
+
   public void init() {
-    String browser = BrowserType.FIREFOX;
-    if (browser.equals(BrowserType.FIREFOX)){
+    if (browser.equals(BrowserType.FIREFOX)) {
       System.setProperty("webdriver.gecko.driver", "C:\\geckodriver\\geckodriver.exe");
       wd = new FirefoxDriver();
-    }else if (browser.equals(BrowserType.CHROME))
-    {
+    } else if (browser.equals(BrowserType.CHROME)) {
       System.setProperty("webdriver.chrome.driver", "C:\\geckodriver\\chromedriver.exe");
-      wd=new ChromeDriver();
-    }
-    else if (browser.equals(BrowserType.IE)){
+      wd = new ChromeDriver();
+    } else if (browser.equals(BrowserType.IE)) {
       System.setProperty("webdriver.ie.driver", "C:\\geckodriver\\IEDriverServer.exe");
-      wd =new InternetExplorerDriver();
+      wd = new InternetExplorerDriver();
       // wd.st("mode=disableSecurity")
     }
 
@@ -49,11 +53,10 @@ public class ApplicationManager {
     wd.get("http://localhost/addressbook/");
     groupHelper = new GroupHelper(wd);
     navigationHelper = new NavigationHelper(wd);
-    sessionHelper=new SessionHelper(wd);
+    sessionHelper = new SessionHelper(wd);
 
     sessionHelper.loginPage("admin", "secret");
   }
-
 
 
   public void stop() {
