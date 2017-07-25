@@ -1,6 +1,5 @@
 package ru.stqa.pft.addreessbook.appmanager;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class ApplicationManager {
   WebDriver wd;
-  private  NaviationHelper naviationHelper;
+  private NavigationHelper navigationHelper;
   private ContactHelper contactHelper;
   private SessionHelper sessionHelper;
   private String browser;
@@ -48,10 +47,10 @@ public class ApplicationManager {
 
    // System.setProperty("webdriver.gecko.driver", "C:\\geckodriver\\geckodriver.exe");
     //wd = new FirefoxDriver();
-    wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+    wd.manage().timeouts().implicitlyWait(45, TimeUnit.SECONDS);//60
     wd.get("http://localhost/addressbook/edit.php");
     contactHelper = new ContactHelper(wd);
-    naviationHelper = new NaviationHelper(wd);
+    navigationHelper = new NavigationHelper(wd);
      sessionHelper= new SessionHelper (wd);
     sessionHelper.loginPage("admin", "secret");
   }
@@ -66,7 +65,7 @@ public class ApplicationManager {
     return contactHelper;
   }
 
-  public NaviationHelper getNaviationHelper() {
-    return naviationHelper;
+  public NavigationHelper getNavigationHelper() {
+    return navigationHelper;
   }
 }

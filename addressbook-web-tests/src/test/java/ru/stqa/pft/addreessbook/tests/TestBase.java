@@ -10,7 +10,7 @@ import ru.stqa.pft.addreessbook.appmanager.ApplicationManager;
  */
 public class TestBase {
 
-  protected  ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
+  protected  ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
 
   @BeforeMethod
   public void setUp() throws Exception {

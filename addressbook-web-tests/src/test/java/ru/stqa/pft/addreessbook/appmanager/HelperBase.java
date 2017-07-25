@@ -1,9 +1,6 @@
 package ru.stqa.pft.addreessbook.appmanager;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -23,17 +20,21 @@ public class HelperBase {
     return wd.findElement(locator).isSelected();
   }
 
-  public void click(By locator) {
+  public void click( By locator) {
     wd.findElement(locator).click();
   }
-
+  public void clickAndWait( By locator) {
+    WebDriverWait wait = new WebDriverWait(wd, 3000);
+    wait.until(ExpectedConditions.elementToBeClickable(locator));
+    wd.findElement(locator).click();
+  }
 
   public void actionPerform(By locator) {
     new Actions(wd).doubleClick(wd.findElement(locator)).build().perform();
   }
 
   public void type(By locator, String text) {
-    wd.findElement(locator).click();
+    click(locator);
     if (text != null) {
       String ExistText = wd.findElement(locator).getAttribute("value");
       if (!ExistText.equals(text)) {
@@ -65,6 +66,16 @@ public class HelperBase {
       return;
     } catch (NoAlertPresentException e) {
       return;
+    }
+  }
+
+  protected boolean islementPresent(By locator) {
+    try {
+      wd.findElement(locator);
+      return true;
+    }catch (NoSuchElementException ex){
+      return false;
+
     }
   }
 }
