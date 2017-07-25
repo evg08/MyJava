@@ -2,7 +2,11 @@ package ru.stqa.pft.addreessbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.BrowserType;
 
 import java.util.concurrent.TimeUnit;
 
@@ -10,10 +14,16 @@ import java.util.concurrent.TimeUnit;
  * Created by Евгения on 24.07.2017.
  */
 public class ApplicationManager {
-  private FirefoxDriver wd;
+  WebDriver wd;
   private  NaviationHelper naviationHelper;
   private ContactHelper contactHelper;
   private SessionHelper sessionHelper;
+  private String browser;
+
+  public ApplicationManager(String browser) {
+    this.browser = browser;
+  }
+
   public static boolean isAlertPresent(FirefoxDriver wd) {
     try {
       wd.switchTo().alert();
@@ -24,8 +34,20 @@ public class ApplicationManager {
   }
 
   public void init() {
-    System.setProperty("webdriver.gecko.driver", "C:\\geckodriver\\geckodriver.exe");
-    wd = new FirefoxDriver();
+    if (browser.equals(BrowserType.FIREFOX)) {
+      System.setProperty("webdriver.gecko.driver", "C:\\geckodriver\\geckodriver.exe");
+      wd = new FirefoxDriver();
+    } else if (browser.equals(BrowserType.CHROME)) {
+      System.setProperty("webdriver.chrome.driver", "C:\\geckodriver\\chromedriver.exe");
+      wd = new ChromeDriver();
+    } else if (browser.equals(BrowserType.IE)) {
+      System.setProperty("webdriver.ie.driver", "C:\\geckodriver\\IEDriverServer.exe");
+      wd = new InternetExplorerDriver();
+      // wd.st("mode=disableSecurity")
+    }
+
+   // System.setProperty("webdriver.gecko.driver", "C:\\geckodriver\\geckodriver.exe");
+    //wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/edit.php");
     contactHelper = new ContactHelper(wd);

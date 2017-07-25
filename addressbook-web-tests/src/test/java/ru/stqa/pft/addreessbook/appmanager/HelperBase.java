@@ -3,6 +3,7 @@ package ru.stqa.pft.addreessbook.appmanager;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,9 +13,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * Created by Евгения on 24.07.2017.
  */
 public class HelperBase {
-  private FirefoxDriver wd;
+   WebDriver wd;
 
-  public HelperBase(FirefoxDriver wd ) {
+  public HelperBase(WebDriver wd) {
     this.wd = wd;
   }
 

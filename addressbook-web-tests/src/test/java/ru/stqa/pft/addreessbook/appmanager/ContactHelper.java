@@ -4,6 +4,7 @@ import com.sun.javafx.binding.ExpressionHelperBase;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,7 +17,7 @@ import ru.stqa.pft.addreessbook.model.ContactData;
 public class ContactHelper extends HelperBase{
 
 
-  public ContactHelper(FirefoxDriver wd) {
+  public ContactHelper(WebDriver wd) {
 
     super(wd);
   }
