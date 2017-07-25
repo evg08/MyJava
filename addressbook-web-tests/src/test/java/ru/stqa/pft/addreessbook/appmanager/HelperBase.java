@@ -13,20 +13,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * Created by Евгения on 24.07.2017.
  */
 public class HelperBase {
-   WebDriver wd;
+  WebDriver wd;
 
   public HelperBase(WebDriver wd) {
     this.wd = wd;
   }
 
   public boolean elementIsSelected(By locator) {
-  return wd.findElement(locator).isSelected();
-}
+    return wd.findElement(locator).isSelected();
+  }
 
   public void click(By locator) {
-  wd.findElement(locator).click();
-}
-
+    wd.findElement(locator).click();
+  }
 
 
   public void actionPerform(By locator) {
@@ -34,33 +33,38 @@ public class HelperBase {
   }
 
   public void type(By locator, String text) {
-  wd.findElement(locator).click();
-  wd.findElement(locator).clear();
-  wd.findElement(locator).sendKeys(text);
-}
+    wd.findElement(locator).click();
+    if (text != null) {
+      String ExistText = wd.findElement(locator).getAttribute("value");
+      if (!ExistText.equals(text)) {
+        wd.findElement(locator).clear();
+        wd.findElement(locator).sendKeys(text);
+      }
+    }
+  }
 
   public void okDialogDeletionButton() {
 
-      Alert alert =(new WebDriverWait(wd, 10)).until(ExpectedConditions.alertIsPresent());
+    Alert alert = (new WebDriverWait(wd, 10)).until(ExpectedConditions.alertIsPresent());
     isAlertAccept(alert);
 
   }
 
-  public void isAlertAccept(Alert alert){
+  public void isAlertAccept(Alert alert) {
     try {
       alert.accept();
-      return ;
+      return;
     } catch (NoAlertPresentException e) {
-      return ;
+      return;
     }
   }
 
-  public void isAlertCancel(Alert alert){
+  public void isAlertCancel(Alert alert) {
     try {
       alert.dismiss();
-      return ;
+      return;
     } catch (NoAlertPresentException e) {
-      return ;
+      return;
     }
   }
 }
