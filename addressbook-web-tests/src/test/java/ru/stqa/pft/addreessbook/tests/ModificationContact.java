@@ -9,7 +9,7 @@ import ru.stqa.pft.addreessbook.model.ContactData;
 public class ModificationContact extends TestBase {
 
   @Test
-  public void deleteContact() {
+  public void modifyContact() {
 
     app.getNavigationHelper().gotoHomepage();
     app.getContactHelper().selectContact();

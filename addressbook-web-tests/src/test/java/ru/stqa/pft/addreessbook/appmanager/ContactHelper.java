@@ -65,27 +65,28 @@ public class ContactHelper extends HelperBase{
 
   public void deleteButton() {
     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+   // click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
   }
 
   public void selectContact() {
-    if (!elementIsSelected(By.name("selected[]"))) {
-      click(By.name("selected[]"));
-    }
-  }
+   WebElement select =wd.findElement(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));
+      select.click();
+
+}
 
   public void ChangeContact() {
+
     actionPerform(By.name("selected[]"));
-    click(By.id("container"));
+//    click(By.id("container"));
     actionPerform(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
 
+
   }
-
+//.//*[@id='maintable']/tbody/tr[1]/th[1]
   public void submitContactModification() {
-    clickAndWait(By.name("update"));
+    click(By.name("update"));
 
-    //input[@name='update'])[2]
-    //click(By.name("update"));
-    //click(By.xpath("//div[@id='content']/form[1]/input[22])"));
+
   }
 
 

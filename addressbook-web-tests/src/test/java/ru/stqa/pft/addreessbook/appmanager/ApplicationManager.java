@@ -47,7 +47,7 @@ public class ApplicationManager {
 
    // System.setProperty("webdriver.gecko.driver", "C:\\geckodriver\\geckodriver.exe");
     //wd = new FirefoxDriver();
-    wd.manage().timeouts().implicitlyWait(45, TimeUnit.SECONDS);//60
+    wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);//60
     wd.get("http://localhost/addressbook/edit.php");
     contactHelper = new ContactHelper(wd);
     navigationHelper = new NavigationHelper(wd);

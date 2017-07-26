@@ -11,7 +11,8 @@ public class AddContact extends TestBase {
     app.getNavigationHelper().goToContactPage();
     app.getContactHelper().fillContact(new ContactData("test1", "test2", "test3", "test4", "test5", "test6", "test7", "1234567", "234567", "1234567", null, null, null,"test135"),true);
     app.getContactHelper().submitContactCreation();
-    app.getContactHelper().returnToContact();
+   // app.getContactHelper().returnToContact();
+
   }
 
 }
