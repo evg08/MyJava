@@ -47,8 +47,9 @@ public class HelperBase {
 
   public void okDialogDeletionButton() {
 
-    Alert alert = (new WebDriverWait(wd, 10)).until(ExpectedConditions.alertIsPresent());
-    isAlertAccept(alert);
+    wd.switchTo().alert().accept();
+    //Alert alert = (new WebDriverWait(wd, 10)).until(ExpectedConditions.alertIsPresent());
+    //isAlertAccept(alert);
 
   }
 
