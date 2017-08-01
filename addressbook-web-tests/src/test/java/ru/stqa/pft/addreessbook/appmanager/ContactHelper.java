@@ -10,6 +10,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.stqa.pft.addreessbook.model.ContactData;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Евгения on 24.07.2017.
  */
@@ -105,5 +108,16 @@ public class ContactHelper extends HelperBase {
   public int getContactCount() {
     return   wd.findElements(By.name("selected[]")).size();
     //wd.findElements(By.name("selected[]")).size();
+  }
+
+  public List<ContactData> getContactList() {
+    List <ContactData> contacts = new ArrayList<ContactData>();
+    List<WebElement>elements =wd.findElements(By.cssSelector("td.center") );
+    for (WebElement element:elements){
+        String lname = element.getText();
+    ContactData  contact =new ContactData(lname,null,null,null,null,null,null,null,null,null,null,null,null,null);
+      contacts.add(contact);
+    }
+    return contacts;
   }
 }
