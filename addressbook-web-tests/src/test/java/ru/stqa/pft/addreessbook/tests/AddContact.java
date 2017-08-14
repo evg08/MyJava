@@ -21,7 +21,10 @@ public class AddContact extends TestBase {
 
     app.getNavigationHelper().gotoHomepage();
     List<ContactData> contactAfter= app.getContactHelper().getContactList();
-   // int contactAfter=app.getContactHelper().getContactCount();
+    int temp1 =contactAfter.size();
+    int temp2 =contactBefore.size();
+
+    //int contactAfter=app.getContactHelper().getContactCount();
     Assert.assertEquals(contactAfter.size(),contactBefore.size()+1);
   }
 

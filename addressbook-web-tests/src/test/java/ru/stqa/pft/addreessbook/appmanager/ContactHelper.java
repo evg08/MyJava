@@ -11,6 +11,7 @@ import org.testng.Assert;
 import ru.stqa.pft.addreessbook.model.ContactData;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -68,20 +69,20 @@ public class ContactHelper extends HelperBase {
 
   public void deleteButton() {
     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
-   // click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+    // click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
     // click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
   }
 
   public void selectContact(int index) {
     wd.findElements(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input")).get(index).click();
-   // WebElement select = wd.findElement(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));
-   // select.click();
+    // WebElement select = wd.findElement(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));
+    // select.click();
 
   }
 
   public void ChangeContact() {
-
-    actionPerform(By.name("selected[]"));
+    //"selected[]"
+    actionPerform(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));
 //    click(By.id("container"));
     actionPerform(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
 
@@ -94,30 +95,72 @@ public class ContactHelper extends HelperBase {
   }
 
 
-  public void createContact(ContactData contactData, boolean create){
-  fillContact( contactData ,true);
-  submitContactCreation();
-  returnToContact();
+  public void createContact(ContactData contactData, boolean create) {
+    fillContact(contactData, true);
+    submitContactCreation();
+    returnToContact();
 
-}
+  }
 
   public boolean isThereContact() {
-    return islementPresent(By.name("selected[]"));
-            //islementPresent(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));
+    ////By.name("selected[]"
+    return islementPresent(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));
+    //islementPresent(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));
   }
+
   public int getContactCount() {
-    return   wd.findElements(By.name("selected[]")).size();
+    //By.name("selected[]"
+    return wd.findElements(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input")).size();
     //wd.findElements(By.name("selected[]")).size();
   }
 
+
   public List<ContactData> getContactList() {
-    List <ContactData> contacts = new ArrayList<ContactData>();
-    List<WebElement>elements =wd.findElements(By.cssSelector("td.center") );
-    for (WebElement element:elements){
+    List<ContactData> contacts = new ArrayList<ContactData>();
+    //-----------------
+    int i = 2;
+    int j;
+    String tablecol;
+    Boolean temp = false;
+    List<WebElement> elements;
+    if (islementPresent(By.xpath(" //div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"))) {
+      temp = true;
+    }
+    while (temp == true) {
+
+      List<String> TableRow = new ArrayList<>();
+      for (j = 2; j < 7; j++) {
+        String StringPath = "//div/div[4]/form[2]/table/tbody/tr[" + i + "]/td[" + j + "]";
+        tablecol = wd.findElement(By.xpath(StringPath)).getText();//getText();
+        if (tablecol.isEmpty()){tablecol=null;}
+        TableRow.add(tablecol);
+      }
+      String d = TableRow.get(2);
+     ContactData contact = new ContactData(TableRow.get(1), null, TableRow.get(0), null, null, TableRow.get(2), TableRow.get(3), null, TableRow.get(4), null, null, null, null, null);
+  //    contacts.add(contact);
+
+     // ContactData contact = new ContactData(null, null,null, null, null, null, null, null, null, null, null, null, null, null);
+     contacts.add(contact);
+
+
+      String StringPath = "//div/div[4]/form[2]/table/tbody/tr[" + (i + 1) + "]/td[1]";
+      if (islementPresent(By.xpath(StringPath))) {
+        temp = true;
+      } else {
+        temp = false;
+      }
+      i++;
+
+    }
+    //---------------
+
+
+    // List<WebElement>elements =wd.findElements(By.name("name selected[]") );
+    /*for (WebElement element:elements){
         String lname = element.getText();
     ContactData  contact =new ContactData(lname,null,null,null,null,null,null,null,null,null,null,null,null,null);
       contacts.add(contact);
-    }
+    }*/
     return contacts;
   }
 }
