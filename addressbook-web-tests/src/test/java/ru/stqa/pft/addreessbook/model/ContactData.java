@@ -14,7 +14,13 @@ public class ContactData {
   private final String yearBirthday;
   private final String addr;
   private final String phone3;
-  private final String group;
+  private  String group;
+
+  public void setGroup(String group) {
+    this.group = group;
+  }
+
+
 
   public ContactData(String firstname, String middlename, String lastname, String nickname, String title, String address, String address2, String home, String mobile, String workphone, String yearBirthday, String addr, String phone3, String group) {
     this.firstname = firstname;

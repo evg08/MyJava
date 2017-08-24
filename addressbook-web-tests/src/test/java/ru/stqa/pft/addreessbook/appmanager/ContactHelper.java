@@ -52,8 +52,23 @@ public class ContactHelper extends HelperBase {
     type(By.name("address2"), contactData.getAddr());
     type(By.name("phone2"), contactData.getPhone3());
     //if element is exist then pick up element of dialog popup list
+
     if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+      List <WebElement> options = wd.findElement(By.name("new_group")).findElements(By.tagName("option"));
+      int i=0;
+      for (WebElement option : options) {
+        if (contactData.getGroup().equalsIgnoreCase(option.getText())){
+          option.click();
+          i=1;
+        }
+      }
+      if (i==0){wd.findElement(By.name("new_group")).findElement(By.tagName("option")).click();}
+     /* if(! wd.findElement(By.name("new_group")).findElements(By.tagName("option")).equals(contactData.getGroup()))
+      { int index=1;
+        String k= wd.findElement(By.name("new_group")).findElements(By.tagName("option")).ge;
+        contactData.setGroup(k);
+      }*/
+    //  new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("[NONE]");//(contactData.getGroup());
     } else {//exception
       Assert.assertFalse(islementPresent(By.name("new_group")));
     }
@@ -74,7 +89,12 @@ public class ContactHelper extends HelperBase {
   }
 
   public void selectContact(int index) {
-    wd.findElements(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input")).get(index).click();
+    //нашли все элементы с selected и кликнули на index по счету
+    wd.findElements(By.name("selected[]")).get(index).click();
+
+    //wd.findElement(By.xpath("//div/div[4]/form[2]/table/tbody/tr[3]/td[1]/input")).click();
+            //.get(index).click();
+            //div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input")).get(index).click();
     // WebElement select = wd.findElement(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));
     // select.click();
 
