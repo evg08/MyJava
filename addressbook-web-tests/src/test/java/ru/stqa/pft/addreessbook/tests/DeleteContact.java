@@ -30,7 +30,8 @@ public class DeleteContact extends TestBase {
    // int contactAfter = app.getContactHelper().getContactCount();
     List<ContactData> contactAfter= app.getContactHelper().getContactList();
     Assert.assertEquals(contactAfter.size(), contactBefore.size() - 1);
-
+    contactBefore.remove(contactBefore.size()-1);
+    Assert.assertEquals(contactAfter, contactBefore);
   }
 
 }
