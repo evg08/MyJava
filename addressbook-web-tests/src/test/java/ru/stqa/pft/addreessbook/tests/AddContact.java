@@ -33,11 +33,11 @@ public class AddContact extends TestBase {
     //int k=0;
     for (ContactData g: contactAfter)
     {
-      if (g.getId()>max) {max=g.getId();
+      if (g.getId()>max) {max=g.getId();}
       //  k++;
     }
 //    contact.setId(max);
-      
+
     contactBefore.add(contact);
     Assert.assertEquals(new HashSet<Object>(contactAfter) ,new HashSet<Object>(contactBefore));
   }
